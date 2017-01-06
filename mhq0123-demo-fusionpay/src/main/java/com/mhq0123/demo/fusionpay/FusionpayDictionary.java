@@ -25,11 +25,11 @@ public class FusionpayDictionary {
 
         CNCB_ALIPAY_SCAN,
 
-        CNCB_WEIXIN_PC,
+        CNCB_WXPAY_PC,
 
-        CNCB_WEIXIN_APP,
+        CNCB_WXPAY_APP,
 
-        CNCB_WEIXIN_SCAN,
+        CNCB_WXPAY_SCAN,
 
         ALIPAY_PC
 

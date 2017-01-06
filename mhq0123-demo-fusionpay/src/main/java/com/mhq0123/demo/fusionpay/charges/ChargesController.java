@@ -88,6 +88,10 @@ public class ChargesController {
                 sHtmlText = cncbService.chargesAlipayAppOrPc(charges).getPayUrl();
                 returnPath = ChargesPath.BASE + ChargesPath.CHARGES_PC_CNCB_ALIPAY;
                 break;
+            case CNCB_WXPAY_PC:
+//                sHtmlText = cncbService.chargesWxpayAppOrPc(charges);
+                returnPath = ChargesPath.BASE + ChargesPath.CHARGES_PC_CNCB_ALIPAY;
+                break;
             default:
                 throw new IllegalArgumentException("暂不支持的操作：" + charges.getChannel());
         }
