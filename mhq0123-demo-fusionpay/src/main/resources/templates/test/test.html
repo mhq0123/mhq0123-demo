@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head></head>
+	<body>
+	<script th:src="@{/js/jquery-1.8.3.min.js}"/>
+
+	<script type="text/javascript">
+		jQuery(function(){
+			$.ajax({
+				url: "/charges/chargesCncbAppApi",
+				type : "post",
+				data : {
+					orderNo 	: '20000',
+					body	: 'dfsdf',
+					amount: '0.01',
+					subject: 'subject'
+				},
+				success : function(data){
+					alert(JSON.stringify(data));
+				},
+				dataType : "json",
+				error : function(data){
+					alert(JSON.stringify(data));
+				}
+			});
+			
+		});  
+	</script>
+	</body>
+	
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>PC网页支付通道</title>
+    <meta charset="UTF-8"/>
+
+    <link th:href="@{/css/fusionpay.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div align="center">
+    <header class="am-header">
+        <h1>PC网页支付通道</h1>
+    </header>
+    <form id="chargesForm" action="#" th:action="@{/charges/chargesPcApi}" th:object="${charges}" method="post">
+        <input type="hidden" th:field="*{orderNo}"/>
+        <input type="hidden" th:field="*{subject}"/>
+        <input type="hidden" th:field="*{amount}"/>
+        <input type="hidden" th:field="*{showUrl}"/>
+        <input type="hidden" th:field="*{body}"/>
+            <input type="hidden" id="channel" th:field="*{channel}" value=""/>
+        <table class="charges_table">
+            <tr>
+                <td colspan="2" align="center" style="color: red">
+                    <div th:text="${charges.orderNo + '-' +charges.subject +'-'+charges.amount}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" height="60px">
+                    <span class="new-btn-login-sp">
+                        <button class="new-btn-login" value="SEVENPAY_PC" onclick="formSubmit(this)">七分钱-PC</button>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" height="60px">
+                    <span class="new-btn-login-sp">
+                        <button class="new-btn-login" value="CNCB_ALIPAY_PC" onclick="formSubmit(this)">中信-支付宝-PC</button>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" height="60px">
+                    <span class="new-btn-login-sp">
+                        <button class="new-btn-login" value="CNCB_WEIXIN_PC" onclick="formSubmit(this)">中信-微信-PC</button>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" height="60px">
+                    <span class="new-btn-login-sp">
+                        <button class="new-btn-login" value="ALIPAY_PC" onclick="formSubmit(this)">支付宝-PC</button>
+                    </span>
+                </td>
+            </tr>
+
+        </table>
+		</form>
+	</div>
+</body>
+<script>
+    function formSubmit(obj) {
+        document.getElementById("channel").value = obj.value;
+        document.getElementById("chargesForm").submit();
+    }
+
+</script>
+</html>

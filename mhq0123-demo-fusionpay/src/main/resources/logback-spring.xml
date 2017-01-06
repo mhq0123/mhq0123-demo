@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<!-- 控制台打印输出 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date %level [%thread] %X{thread_token} %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+	<!-- 文件日志 -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/${LOG_FILE}.log</file>
+		 
+         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         <!-- linux 下后缀为gz, window 下后缀为zip -->
+		    <fileNamePattern>${LOG_PATH}/${LOG_FILE}_%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+	      	<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	    	 	<maxFileSize>100MB</maxFileSize>
+	   	  	</timeBasedFileNamingAndTriggeringPolicy>        
+		  </rollingPolicy>
+		  
+        <encoder>
+        	<pattern>%date %level [%thread] %X{thread_token} %logger{10} [%file:%line] %msg%n</pattern>
+        	<charset>UTF-8</charset>
+        </encoder>
+    </appender>   
+
+	<!-- 开发环境-->
+	<springProfile name="dev">
+		<root level="info">
+			<appender-ref ref="FILE" />
+			<appender-ref ref="STDOUT" />
+		</root>
+	</springProfile>
+
+	<!-- 测试、生产环境 -->
+	<springProfile name="test,prod">
+		<root level="info">
+			<appender-ref ref="FILE" />
+			<!--jar启动不要这个，tomcat容器下要<appender-ref ref="STDOUT" />-->
+		</root>
+	</springProfile>
+	
+</configuration>

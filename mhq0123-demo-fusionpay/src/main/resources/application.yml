@@ -1,0 +1,38 @@
+server:
+  port: 1234
+
+spring:
+  application:
+    name: mhq0123-demo-fusionpay
+
+  #解决页面乱码
+  http:
+    encoding:
+      force: true
+
+  #cncb
+  cncb:
+    invoker_url: http://192.168.1.96:8050/gateway/bank/cncb
+
+  #默认开发
+  profiles:
+    active: dev
+
+  thymeleaf:
+    cache: false
+
+#日志
+logging:
+  config: classpath:logback-spring.xml
+  path: /root/mhq0123-demo/logs/${spring.application.name}
+  file: ${spring.application.name}
+
+#开发
+---
+spring:
+  profiles: dev
+
+---
+#生产
+spring:
+  profiles: prod

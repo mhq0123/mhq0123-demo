@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>支付宝PC支付</title>
+    <meta charset="UTF-8"/>
+
+    <link th:href="@{/css/fusionpay.css}" rel="stylesheet"/>
+    <script th:src="@{/js/jquery.qrcode.min.js}"></script>
+</head>
+
+<body>
+<div align="center">
+    <header class="am-header">
+        <h1>支付宝PC支付</h1>
+    </header>
+    <div align="center">
+        <input type="hidden" id="content" th:value="${sHtmlText}"/>
+        <span id="output"></span>
+    </div>
+</div>
+</body>
+<script>
+    jQuery(function(){
+        var content = $('#content').val();
+        jQuery('#output').qrcode({width:200,height:200,correctLevel:0,text:content});
+    });
+</script>
+</html>
