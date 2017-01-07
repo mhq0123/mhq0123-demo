@@ -48,6 +48,7 @@ public class ChargesController {
         charges.setSubject("测试");
         charges.setBody("描述");
         charges.setAmount("0.01");
+        charges.setShowUrl("http://goods");
 
         return ChargesPath.BASE + ChargesPath.CHARGES_PC;
     }
