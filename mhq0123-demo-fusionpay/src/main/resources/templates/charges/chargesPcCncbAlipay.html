@@ -16,13 +16,13 @@
         <h1>支付宝PC支付</h1>
     </header>
     <br/><br/><br/><br/><br/><br/><br/><br/>
+    <input id="content" type="hidden" th:value="${sHtmlText}"/>
     <div id="qrcode"></div>
 </div>
 </body>
 <script type="text/javascript">
     jQuery(function(){
-//        var content = $('#content').val();
-        var content = 'https://pay.swiftpass.cn/pay/prepay?token_id=0fc6eb5a7aa90901318c531996f9c2c3&amp;trade_type=pay.alipay.jspayv3';
+        var content = $('#content').val();
         jQuery('#qrcode').qrcode({width: 200,height: 200,text: content});
     });
 </script>

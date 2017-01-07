@@ -89,7 +89,7 @@ public class ChargesController {
                 returnPath = ChargesPath.BASE + ChargesPath.CHARGES_PC_CNCB_ALIPAY;
                 break;
             case CNCB_WXPAY_PC:
-//                sHtmlText = cncbService.chargesWxpayAppOrPc(charges);
+                sHtmlText = cncbService.chargesWxpayAppOrPc(charges);
                 returnPath = ChargesPath.BASE + ChargesPath.CHARGES_PC_CNCB_ALIPAY;
                 break;
             default:

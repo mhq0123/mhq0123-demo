@@ -11,7 +11,6 @@ import com.sevenpay.gateway.bank.cncb.impl.A01.bean.TxnA01ResponseBody;
 import com.sevenpay.gateway.bank.cncb.impl.W01.bean.TxnW01RequestBean;
 import com.sevenpay.gateway.bank.cncb.impl.W01.bean.TxnW01RequestBody;
 import com.sevenpay.gateway.bank.cncb.impl.W01.bean.TxnW01ResponseBean;
-import com.sevenpay.gateway.bank.cncb.impl.W01.bean.TxnW01ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +80,7 @@ public class CncbService {
      * @param charges
      * @return
      */
-    public TxnW01ResponseBody chargesWxpayAppOrPc(Charges charges) {
+    public String chargesWxpayAppOrPc(Charges charges) {
 
         logger.info(">>>>>>>>>>>>>charges:{}", JSONObject.toJSONString(charges, true));
 
@@ -107,6 +106,7 @@ public class CncbService {
                 body.setTimeExpire("");// 订单超时时间;
                 body.setGoodsTag("");// 商品标记, 微信平台配置的商品标记，用于优惠券或者满减使用
                 body.setLimitCreditPay("0"); // 是否限制信用卡 0
+                body.setOrderUrl(charges.getShowUrl());
             }
 
             request.setHead(head);
@@ -117,6 +117,6 @@ public class CncbService {
         TxnW01ResponseBean response = cncbService.txnW01(request);
         logger.info(">>>>>>>>>>>>>response:{}", JSONObject.toJSONString(response, true));
 
-        return response.getBody();
+        return "https://pay.swiftpass.cn/pay/jspay?token_id=" + response.getBody().getTokenId() + "&showwxtitle=1";
     }
 }
