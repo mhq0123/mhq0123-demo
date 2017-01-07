@@ -18,7 +18,7 @@ public class CncbInvokerInit {
     private HttpComponentsHttpInvokerRequestExecutor httpInvokerRequestExecutor;
         
     @Bean
-    public HttpInvokerProxyFactoryBean userService(){    
+    public HttpInvokerProxyFactoryBean cncbService(){
         HttpInvokerProxyFactoryBean bean = new HttpInvokerProxyFactoryBean();
         bean.setServiceUrl(invokerUrl);
         bean.setServiceInterface(ICncb.class);
