@@ -12,7 +12,7 @@ spring:
 
   #cncb
   cncb:
-    invoker_url: http://192.168.1.96:8050/gateway/bank/cncb
+    invoker_url: http://192.168.1.15:10118/gateway/bank/cncb
 
   #默认开发
   profiles:

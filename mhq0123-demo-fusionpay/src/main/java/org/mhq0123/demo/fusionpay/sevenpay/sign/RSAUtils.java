@@ -174,7 +174,4 @@ public class RSAUtils {
         return result;
 	} 
 	
-	public static void main(String[] args) throws Exception {
-		RSAUtils.sign("你好".getBytes("UTF-8"), null);
-	}
-}  
+}

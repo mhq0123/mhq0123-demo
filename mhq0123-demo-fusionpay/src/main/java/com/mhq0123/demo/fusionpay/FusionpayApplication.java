@@ -2,10 +2,12 @@ package com.mhq0123.demo.fusionpay;
 
 import org.mhq0123.demo.common.adapter.CorsConfigurerAdapter;
 import org.mhq0123.demo.common.filter.GenernalFilter;
+import org.mhq0123.demo.fusionpay.cncb.CncbInvokerInit;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 
 import javax.servlet.Filter;
 
@@ -16,7 +18,8 @@ import javax.servlet.Filter;
  * desc:
  */
 @SpringBootApplication
-@ComponentScan("com.mhq0123,org.mhq0123")
+@ComponentScan({"com.sevenpay", "org.mhq0123", "com.mhq0123"})
+@Import(CncbInvokerInit.class)
 public class FusionpayApplication {
 
     @Bean

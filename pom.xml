@@ -9,9 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>mhq0123-demo-alipay</module>
-        <module>mhq0123-demo-fusionpay</module>
         <module>mhq0123-demo-common</module>
+        <module>mhq0123-demo-fusionpay</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -24,6 +23,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>${version.org.springframework.boot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>${version.org.springframework.boot}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -45,33 +54,6 @@
             <artifactId>fastjson</artifactId>
             <version>${version.com.alibaba.fastjson}</version>
         </dependency>
-        <dependency>
-            <groupId>com.mhq0123.demo</groupId>
-            <artifactId>mhq0123-demo-common</artifactId>
-            <version>${version.com.mhq0123.demo.common}</version>
-        </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <!--clean install spring-boot:repackage-->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${version.org.springframework.boot}</version>
-                <configuration>
-                    <!--fork:  如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
-                    <fork>true</fork>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

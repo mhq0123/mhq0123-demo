@@ -11,6 +11,7 @@
 
     <artifactId>mhq0123-demo-common</artifactId>
     <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
