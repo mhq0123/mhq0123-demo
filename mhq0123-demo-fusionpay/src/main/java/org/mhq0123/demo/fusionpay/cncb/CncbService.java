@@ -11,6 +11,10 @@ import com.sevenpay.gateway.bank.cncb.impl.A01.bean.TxnA01ResponseBody;
 import com.sevenpay.gateway.bank.cncb.impl.W01.bean.TxnW01RequestBean;
 import com.sevenpay.gateway.bank.cncb.impl.W01.bean.TxnW01RequestBody;
 import com.sevenpay.gateway.bank.cncb.impl.W01.bean.TxnW01ResponseBean;
+import com.sevenpay.gateway.bank.cncb.impl.W03.bean.TxnW03RequestBean;
+import com.sevenpay.gateway.bank.cncb.impl.W03.bean.TxnW03RequestBody;
+import com.sevenpay.gateway.bank.cncb.impl.W03.bean.TxnW03ResponseBean;
+import com.sevenpay.gateway.bank.cncb.impl.W03.bean.TxnW03ResponseBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +41,7 @@ public class CncbService {
      * @param charges
      * @return
      */
-    public TxnA01ResponseBody chargesAlipayAppOrPc(Charges charges) {
+    public TxnA01ResponseBody chargesAlipayScanOrPc(Charges charges) {
 
         logger.info(">>>>>>>>>>>>>charges:{}", JSONObject.toJSONString(charges, true));
 
@@ -80,7 +84,7 @@ public class CncbService {
      * @param charges
      * @return
      */
-    public String chargesWxpayAppOrPc(Charges charges) {
+    public String chargesWxpayScanOrPc(Charges charges) {
 
         logger.info(">>>>>>>>>>>>>charges:{}", JSONObject.toJSONString(charges, true));
 
@@ -118,5 +122,44 @@ public class CncbService {
         logger.info(">>>>>>>>>>>>>response:{}", JSONObject.toJSONString(response, true));
 
         return "https://pay.swiftpass.cn/pay/jspay?token_id=" + response.getBody().getTokenId() + "&showwxtitle=1";
+    }
+
+    /**
+     * app支付
+     * @param charges
+     * @return
+     */
+    public TxnW03ResponseBody chargesWxpayApp(Charges charges) {
+
+        logger.info(">>>>>>>>>>>>>charges:{}", JSONObject.toJSONString(charges, true));
+
+        TxnW03RequestBean request = new TxnW03RequestBean();
+        {
+            RequestHead head = new RequestHead();
+            {
+                head.setMsgId(charges.getOrderNo());
+                head.setSysId("S002");
+            }
+            TxnW03RequestBody body = new TxnW03RequestBody();
+            {
+                body.setOutTradeNo(charges.getOrderNo()); // 商户订单号
+                body.setDeviceInfo(""); // 终端设备号
+                body.setBody(charges.getBody()); // 商品描述
+                body.setAttach("{\"merchentid\":\"0001\"}");// 附加信息
+                body.setTotalFee(new BigDecimal(charges.getAmount()));// 总金额
+                body.setMchCreateIp("192.168.1.100");// 订单生成的机器IP
+                body.setTimeStart("");// 订单生成时间
+                body.setTimeExpire("");// 订单超时时间;
+                body.setGoodsTag("");// 商品标记, 微信平台配置的商品标记，用于优惠券或者满减使用
+
+            }
+
+            request.setHead(head);
+            request.setBody(body);
+        }
+        logger.info(">>>>>>>>>>>>>request:{}", JSONObject.toJSONString(request, true));
+        TxnW03ResponseBean response = cncbService.txnW03(request);
+        logger.info(">>>>>>>>>>>>>response:{}", JSONObject.toJSONString(response, true));
+        return response.getBody();
     }
 }

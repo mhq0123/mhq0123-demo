@@ -86,11 +86,11 @@ public class ChargesController {
                 sHtmlText = alipayService.chargesPc(charges);
                 break;
             case CNCB_ALIPAY_PC:
-                sHtmlText = cncbService.chargesAlipayAppOrPc(charges).getPayUrl();
+                sHtmlText = cncbService.chargesAlipayScanOrPc(charges).getPayUrl();
                 returnPath = ChargesPath.BASE + ChargesPath.CHARGES_PC_CNCB_ALIPAY;
                 break;
             case CNCB_WXPAY_PC:
-                sHtmlText = cncbService.chargesWxpayAppOrPc(charges);
+                sHtmlText = cncbService.chargesWxpayScanOrPc(charges);
                 returnPath = ChargesPath.BASE + ChargesPath.CHARGES_PC_CNCB_ALIPAY;
                 break;
             default:
@@ -100,57 +100,6 @@ public class ChargesController {
         model.addAttribute("sHtmlText", sHtmlText);
 
         return returnPath;
-    }
-
-    /**
-     * 收费
-     * @param charges
-     * @param model
-     * @return
-     */
-    @PostMapping(ChargesPath.CHARGES_APP_API)
-    public String chargesAppApi(@ModelAttribute("charges")Charges charges, Model model) {
-
-        logger.info(">>>>>>>>>>>>>charges:{}", JSONObject.toJSONString(charges, true));
-
-        String sHtmlText = null;
-
-        if("alipay_app".equals(charges.getChannel())) {
-            // 支付宝 APP 支付
-            sHtmlText = alipayService.chargesApp(charges);
-        } else {
-            throw new IllegalArgumentException("暂不支持的操作：" + charges.getChannel());
-        }
-
-        model.addAttribute("sHtmlText", sHtmlText);
-
-        return ChargesPath.BASE + ChargesPath.CHARGES_APP_API;
-    }
-
-    /**
-     * h5支付
-     * @param charges
-     * @param model
-     * @return
-     * @throws Exception
-     */
-    @PostMapping(ChargesPath.CHARGES_H5_API)
-    public String chargesH5Api(@ModelAttribute("charges")Charges charges, Model model) throws Exception {
-
-        logger.info(">>>>>>>>>>>>>charges:{}", JSONObject.toJSONString(charges, true));
-
-        String sHtmlText = null;
-
-        if("alipay_wap".equals(charges.getChannel())) {
-            // 支付宝手机网页支付
-            sHtmlText = alipayService.chargesH5(charges);
-        } else {
-            throw new IllegalArgumentException("暂不支持的操作：" + charges.getChannel());
-        }
-
-        model.addAttribute("sHtmlText", sHtmlText);
-
-        return ChargesPath.BASE + ChargesPath.CHARGES_H5_API;
     }
 
 }
